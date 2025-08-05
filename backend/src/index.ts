@@ -38,7 +38,7 @@ app.get(
   asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     throw new BadRequestException("This is a test error");
     res.status(HTTPSTATUS.OK).json({
-      message: "Hello Subcribe to the channel",
+      message: "Hello World",
     });
   })
 );
@@ -47,7 +47,10 @@ app.use(`${BASE_PATH}/auth`, authRoutes);
 app.use(`${BASE_PATH}/user`, passportAuthenticateJwt, userRoutes);
 app.use(`${BASE_PATH}/transaction`, passportAuthenticateJwt, transactionRoutes);
 app.use(`${BASE_PATH}/report`, passportAuthenticateJwt, reportRoutes);
+import healthRoutes from "./routes/health.route";
+
 app.use(`${BASE_PATH}/analytics`, passportAuthenticateJwt, analyticsRoutes);
+app.use(`${BASE_PATH}`, healthRoutes);
 
 app.use(errorHandler);
 
